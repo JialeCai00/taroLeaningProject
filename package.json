@@ -29,7 +29,8 @@
     "dev:rn": "npm run build:rn -- --watch",
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
-    "dev:harmony-hybrid": "npm run build:harmony-hybrid -- --watch"
+    "dev:harmony-hybrid": "npm run build:harmony-hybrid -- --watch",
+    "postinstall": "weapp-tw patch"
   },
   "browserslist": [
     "defaults and fully supports es6-module",
@@ -81,7 +82,7 @@
     "sass": "^1.75.0",
     "stylelint": "^16.4.0",
     "stylelint-config-standard": "^38.0.0",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^3.4.19",
     "terser": "^5.30.4",
     "typescript": "^5.4.5",
     "vite": "^4.2.0",
