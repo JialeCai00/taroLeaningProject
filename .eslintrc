@@ -2,6 +2,23 @@
   "extends": ["taro/react"],
   "rules": {
     "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "spellcheck/spell-checker": [
+      "error",
+      {
+        "skipWords": [
+          "tarojs",
+          "taro",
+          "weapp",
+          "alipay",
+          "swan",
+          "tt",
+          "qq",
+          "jd",
+          "h5",
+          "rn"
+        ]
+      }
+    ]
   }
 }

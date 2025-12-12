@@ -20,13 +20,15 @@ export default defineConfig<"vite">(async (merge, { command, mode }) => {
     },
     sourceRoot: "src",
     outputRoot: "dist",
-    plugins: ["@tarojs/plugin-generator"],
     defineConstants: {},
     copy: {
       patterns: [],
       options: {},
     },
     framework: "react",
+    optimizeDeps: {
+      include: ["jotai"],
+    },
     compiler: {
       type: "vite",
       vitePlugins: [
