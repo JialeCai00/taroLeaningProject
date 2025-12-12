@@ -15,24 +15,31 @@
 ## 🛠️ 技术栈
 
 ### Taro 框架
+
 Taro 是一个开放式跨端跨框架解决方案，支持使用 React/Vue/Nerv 等框架来开发微信小程序。
 
 ### React 18
+
 现代化的 React 版本，支持：
+
 - Concurrent Features (并发特性)
 - Automatic Batching (自动批处理)
 - Suspense (悬念)
 - Hooks (钩子)
 
 ### Tailwind CSS
+
 原子化 CSS 框架，提供：
+
 - 响应式设计
 - 暗色模式支持
 - 自定义主题
 - JIT (Just-In-Time) 编译
 
 ### Jotai
+
 轻量级状态管理库，提供：
+
 - 原子化状态管理
 - 派生状态 (derived state)
 - 异步状态支持
@@ -120,42 +127,40 @@ pnpm run build:tt      # 字节跳动小程序
 ```typescript
 // src/pages/index/index.config.ts
 export default definePageConfig({
-  navigationBarTitleText: '首页',
-  navigationBarBackgroundColor: '#fff',
-  navigationBarTextStyle: 'black',
-  backgroundColor: '#f5f5f5'
-})
+  navigationBarTitleText: "首页",
+  navigationBarBackgroundColor: "#fff",
+  navigationBarTextStyle: "black",
+  backgroundColor: "#f5f5f5",
+});
 ```
 
 #### 页面组件
 
 ```tsx
 // src/pages/index/index.tsx
-import { View, Text, Button } from '@tarojs/components'
+import { View, Text, Button } from "@tarojs/components";
 
 export default function Index() {
   return (
     <View className="container">
       <Text>Hello Taro!</Text>
-      <Button onClick={() => console.log('clicked')}>
-        点击我
-      </Button>
+      <Button onClick={() => console.log("clicked")}>点击我</Button>
     </View>
-  )
+  );
 }
 ```
 
 #### 生命周期
 
 ```tsx
-import { useLaunch } from '@tarojs/taro'
+import { useLaunch } from "@tarojs/taro";
 
 function App() {
   useLaunch(() => {
-    console.log('App launched.')
-  })
+    console.log("App launched.");
+  });
 
-  return <View>...</View>
+  return <View>...</View>;
 }
 ```
 
@@ -164,23 +169,21 @@ function App() {
 #### 基础 Hooks
 
 ```tsx
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 function Counter() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    console.log(`Count changed to: ${count}`)
-  }, [count])
+    console.log(`Count changed to: ${count}`);
+  }, [count]);
 
   return (
     <View>
       <Text>{count}</Text>
-      <Button onClick={() => setCount(count + 1)}>
-        增加
-      </Button>
+      <Button onClick={() => setCount(count + 1)}>增加</Button>
     </View>
-  )
+  );
 }
 ```
 
@@ -188,21 +191,21 @@ function Counter() {
 
 ```tsx
 // hooks/useCounter.ts
-import { useState } from 'react'
+import { useState } from "react";
 
 export function useCounter(initialValue = 0) {
-  const [count, setCount] = useState(initialValue)
+  const [count, setCount] = useState(initialValue);
 
-  const increment = () => setCount(c => c + 1)
-  const decrement = () => setCount(c => c - 1)
-  const reset = () => setCount(initialValue)
+  const increment = () => setCount((c) => c + 1);
+  const decrement = () => setCount((c) => c - 1);
+  const reset = () => setCount(initialValue);
 
-  return { count, increment, decrement, reset }
+  return { count, increment, decrement, reset };
 }
 
 // 使用自定义 Hook
 function CounterComponent() {
-  const { count, increment, decrement, reset } = useCounter(0)
+  const { count, increment, decrement, reset } = useCounter(0);
 
   return (
     <View>
@@ -211,7 +214,7 @@ function CounterComponent() {
       <Button onClick={decrement}>-</Button>
       <Button onClick={reset}>重置</Button>
     </View>
-  )
+  );
 }
 ```
 
@@ -223,14 +226,10 @@ function CounterComponent() {
 function Card() {
   return (
     <View className="bg-white rounded-lg shadow-md p-4 m-4">
-      <Text className="text-xl font-bold text-gray-800 mb-2">
-        卡片标题
-      </Text>
-      <Text className="text-gray-600">
-        这是一个卡片内容
-      </Text>
+      <Text className="text-xl font-bold text-gray-800 mb-2">卡片标题</Text>
+      <Text className="text-gray-600">这是一个卡片内容</Text>
     </View>
-  )
+  );
 }
 ```
 
@@ -240,17 +239,11 @@ function Card() {
 function ResponsiveComponent() {
   return (
     <View className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <View className="bg-blue-500 p-4 text-white">
-        项目 1
-      </View>
-      <View className="bg-green-500 p-4 text-white">
-        项目 2
-      </View>
-      <View className="bg-red-500 p-4 text-white">
-        项目 3
-      </View>
+      <View className="bg-blue-500 p-4 text-white">项目 1</View>
+      <View className="bg-green-500 p-4 text-white">项目 2</View>
+      <View className="bg-red-500 p-4 text-white">项目 3</View>
     </View>
-  )
+  );
 }
 ```
 
@@ -273,23 +266,23 @@ function ResponsiveComponent() {
 
 ```typescript
 // src/store/atoms.ts
-import { atom } from 'jotai'
+import { atom } from "jotai";
 
 // 基础状态
-export const countAtom = atom(0)
+export const countAtom = atom(0);
 
 // 对象状态
 export const userAtom = atom({
-  name: '张三',
+  name: "张三",
   age: 25,
-  email: 'zhangsan@example.com'
-})
+  email: "zhangsan@example.com",
+});
 
 // 数组状态
 export const todosAtom = atom([
-  { id: 1, text: '学习 Taro', completed: false },
-  { id: 2, text: '学习 React', completed: true }
-])
+  { id: 1, text: "学习 Taro", completed: false },
+  { id: 2, text: "学习 React", completed: true },
+]);
 ```
 
 #### 派生状态 (Derived State)
@@ -297,20 +290,20 @@ export const todosAtom = atom([
 ```typescript
 // 基于其他状态计算的派生状态
 export const completedTodosAtom = atom((get) => {
-  const todos = get(todosAtom)
-  return todos.filter(todo => todo.completed)
-})
+  const todos = get(todosAtom);
+  return todos.filter((todo) => todo.completed);
+});
 
 export const totalTodosAtom = atom((get) => {
-  const todos = get(todosAtom)
-  return todos.length
-})
+  const todos = get(todosAtom);
+  return todos.length;
+});
 
 export const completedPercentageAtom = atom((get) => {
-  const todos = get(todosAtom)
-  const completed = todos.filter(todo => todo.completed).length
-  return todos.length > 0 ? (completed / todos.length) * 100 : 0
-})
+  const todos = get(todosAtom);
+  const completed = todos.filter((todo) => todo.completed).length;
+  return todos.length > 0 ? (completed / todos.length) * 100 : 0;
+});
 ```
 
 #### 异步状态
@@ -318,35 +311,35 @@ export const completedPercentageAtom = atom((get) => {
 ```typescript
 // 异步状态
 export const asyncDataAtom = atom(async () => {
-  const response = await fetch('/api/data')
-  return response.json()
-})
+  const response = await fetch("/api/data");
+  return response.json();
+});
 
 // 或者使用异步原子
-import { atomWithQuery } from 'jotai-tanstack-query'
+import { atomWithQuery } from "jotai-tanstack-query";
 
 export const userDataAtom = atomWithQuery(() => ({
-  queryKey: ['user'],
+  queryKey: ["user"],
   queryFn: async () => {
-    const response = await fetch('/api/user')
-    return response.json()
-  }
-}))
+    const response = await fetch("/api/user");
+    return response.json();
+  },
+}));
 ```
 
 #### 本地存储持久化
 
 ```typescript
-import { atomWithStorage } from 'jotai/utils'
+import { atomWithStorage } from "jotai/utils";
 
 // 本地存储状态
-export const themeAtom = atomWithStorage('theme', 'light')
-export const usernameAtom = atomWithStorage('username', '访客')
-export const preferencesAtom = atomWithStorage('preferences', {
+export const themeAtom = atomWithStorage("theme", "light");
+export const usernameAtom = atomWithStorage("username", "访客");
+export const preferencesAtom = atomWithStorage("preferences", {
   notifications: true,
   sound: false,
-  language: 'zh-CN'
-})
+  language: "zh-CN",
+});
 ```
 
 #### 状态更新函数
@@ -354,57 +347,63 @@ export const preferencesAtom = atomWithStorage('preferences', {
 ```typescript
 // 写原子 (setter functions)
 export const incrementCountAtom = atom(null, (get, set) => {
-  const currentCount = get(countAtom)
-  set(countAtom, currentCount + 1)
-})
+  const currentCount = get(countAtom);
+  set(countAtom, currentCount + 1);
+});
 
 export const addTodoAtom = atom(null, (get, set, newTodo: string) => {
-  const todos = get(todosAtom)
-  const newId = Math.max(...todos.map(todo => todo.id)) + 1
-  set(todosAtom, [...todos, {
-    id: newId,
-    text: newTodo,
-    completed: false
-  }])
-})
+  const todos = get(todosAtom);
+  const newId = Math.max(...todos.map((todo) => todo.id)) + 1;
+  set(todosAtom, [
+    ...todos,
+    {
+      id: newId,
+      text: newTodo,
+      completed: false,
+    },
+  ]);
+});
 
 export const toggleTodoAtom = atom(null, (get, set, id: number) => {
-  const todos = get(todosAtom)
-  set(todosAtom, todos.map(todo =>
-    todo.id === id ? { ...todo, completed: !todo.completed } : todo
-  ))
-})
+  const todos = get(todosAtom);
+  set(
+    todosAtom,
+    todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    )
+  );
+});
 ```
 
 #### 在组件中使用
 
 ```tsx
-import { useAtom } from 'jotai'
+import { useAtom } from "jotai";
 import {
   countAtom,
   userAtom,
   todosAtom,
   incrementCountAtom,
   addTodoAtom,
-  toggleTodoAtom
-} from '../store/atoms'
+  toggleTodoAtom,
+} from "../store/atoms";
 
 function TodoApp() {
-  const [count, setCount] = useAtom(countAtom)
-  const [user, setUser] = useAtom(userAtom)
-  const [todos] = useAtom(todosAtom)
-  const [, increment] = useAtom(incrementCountAtom)
-  const [, addTodo] = useAtom(addTodoAtom)
-  const [, toggleTodo] = useAtom(toggleTodoAtom)
+  const [count, setCount] = useAtom(countAtom);
+  const [user, setUser] = useAtom(userAtom);
+  const [todos] = useAtom(todosAtom);
+  const [, increment] = useAtom(incrementCountAtom);
+  const [, addTodo] = useAtom(addTodoAtom);
+  const [, toggleTodo] = useAtom(toggleTodoAtom);
 
-  const [newTodo, setNewTodo] = useState('')
+  const [newTodo, setNewTodo] = useState("");
 
   const handleAddTodo = () => {
     if (newTodo.trim()) {
-      addTodo(newTodo.trim())
-      setNewTodo('')
+      addTodo(newTodo.trim());
+      setNewTodo("");
     }
-  }
+  };
 
   return (
     <View className="p-4">
@@ -412,7 +411,9 @@ function TodoApp() {
       <View className="mb-6">
         <Text className="text-lg font-bold mb-2">计数器: {count}</Text>
         <Button onClick={() => setCount(count + 1)}>+1</Button>
-        <Button onClick={increment} className="ml-2">递增</Button>
+        <Button onClick={increment} className="ml-2">
+          递增
+        </Button>
       </View>
 
       {/* 用户信息 */}
@@ -421,7 +422,7 @@ function TodoApp() {
         <Text>姓名: {user.name}</Text>
         <Text>年龄: {user.age}</Text>
         <Button
-          onClick={() => setUser({...user, age: user.age + 1})}
+          onClick={() => setUser({ ...user, age: user.age + 1 })}
           className="mt-2"
         >
           增加年龄
@@ -445,29 +446,28 @@ function TodoApp() {
 
         {/* 事项列表 */}
         <View className="space-y-2">
-          {todos.map(todo => (
+          {todos.map((todo) => (
             <View
               key={todo.id}
               className="flex items-center gap-2 p-2 border border-gray-200 rounded"
             >
               <Text
-                className={`flex-1 ${todo.completed ? 'line-through text-gray-500' : ''}`}
+                className={`flex-1 ${
+                  todo.completed ? "line-through text-gray-500" : ""
+                }`}
                 onClick={() => toggleTodo(todo.id)}
               >
                 {todo.text}
               </Text>
-              <Button
-                onClick={() => toggleTodo(todo.id)}
-                className="text-sm"
-              >
-                {todo.completed ? '未完成' : '完成'}
+              <Button onClick={() => toggleTodo(todo.id)} className="text-sm">
+                {todo.completed ? "未完成" : "完成"}
               </Button>
             </View>
           ))}
         </View>
       </View>
     </View>
-  )
+  );
 }
 ```
 
@@ -571,8 +571,8 @@ git commit -m "build: 更新依赖版本"
 
 如有问题或建议，请通过以下方式联系：
 
-- 提交 Issue: [GitHub Issues](https://github.com/your-repo/issues)
-- 邮箱: your-email@example.com
+- 提交 Issue: [GitHub Issues](https://github.com/JialeCai00/taroLeaningProject/issues/new)
+- 邮箱: jiale.cai@thoughtworks.com
 
 ---
 
