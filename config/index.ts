@@ -56,6 +56,7 @@ export default defineConfig<"vite">(async (merge, { command, mode }) => {
       ] as Plugin[], // 从 vite 引入 type, 为了智能提示
     },
     mini: {
+      debugReact: true,
       postcss: {
         pxtransform: {
           enable: true,
