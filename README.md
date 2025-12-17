@@ -45,6 +45,76 @@ Taro 是一个开放式跨端跨框架解决方案，支持使用 React/Vue/Nerv
 - 异步状态支持
 - 本地存储集成
 
+## 🏗️ 架构设计
+
+### 组件化架构
+
+本项目采用现代化的组件化架构，将页面拆分为可复用的组件和自定义 hooks，提高代码的可维护性和复用性。
+
+#### 可复用组件
+
+- **StatisticCard**: 统计数据显示组件
+- **TeamCard**: 队伍信息展示组件
+- **DonationCard**: 捐赠记录展示组件
+- **MessageCard**: 留言展示组件
+
+#### 自定义 Hooks
+
+- **useMockData**: 模拟数据管理，提供统一的业务数据接口
+- **useTeams**: 队伍数据管理，提供筛选和状态管理功能
+- **useNavigation**: 导航管理，提供页面跳转功能
+
+#### 工具函数
+
+- **formatters.ts**: 数据格式化工具函数
+- **constants.ts**: 常量定义文件
+
+### 设计原则
+
+1. **单一职责**: 每个组件和 Hook 都有明确的职责
+2. **可复用性**: 组件设计为高度可复用
+3. **类型安全**: 使用 TypeScript 提供完整的类型检查
+4. **性能优化**: 使用 React.memo、useMemo 等优化手段
+
+### 组件使用示例
+
+#### 使用 StatisticCard 组件
+
+```tsx
+import { StatisticCard } from '../components';
+
+// 显示统计数据
+<StatisticCard
+  value={715}
+  label="参与队伍"
+/>
+```
+
+#### 使用 TeamCard 组件
+
+```tsx
+import { TeamCard } from '../components';
+
+<TeamCard
+  team={teamData}
+  onViewDetail={() => console.log('查看详情')}
+  onDonate={() => console.log('我要捐款')}
+/>
+```
+
+#### 使用自定义 Hook
+
+```tsx
+import { useMockData, useTeams } from '../hooks';
+
+function TeamsPage() {
+  const { teams, filter, setFilter } = useTeams();
+  const { statistics } = useMockData();
+
+  // 使用数据...
+}
+```
+
 ## 📁 目录结构
 
 ```
@@ -58,14 +128,42 @@ taroProject/
 │   ├── app.scss          # 全局样式
 │   ├── app.ts            # 小程序入口
 │   ├── index.html        # HTML 模板
+│   ├── components/       # 可复用组件
+│   │   ├── index.ts      # 组件导出
+│   │   ├── StatisticCard.tsx     # 统计卡片组件
+│   │   ├── TeamCard.tsx          # 队伍卡片组件
+│   │   ├── DonationCard.tsx      # 捐赠卡片组件
+│   │   └── MessageCard.tsx       # 留言卡片组件
+│   ├── hooks/            # 自定义 Hooks
+│   │   ├── index.ts      # Hooks 导出
+│   │   ├── useMockData.ts        # 模拟数据 Hook
+│   │   ├── useTeams.ts           # 队伍数据管理 Hook
+│   │   └── useNavigation.ts      # 导航 Hook
 │   ├── pages/            # 页面目录
-│   │   └── index/        # 首页
-│   │       ├── index.config.ts  # 页面配置
-│   │       ├── index.scss       # 页面样式
-│   │       └── index.tsx        # 页面组件
-│   └── store/            # 状态管理
-│       └── atoms.ts      # Jotai 原子状态
-├── types/                 # 类型定义
+│   │   ├── index/        # 首页
+│   │   │   ├── index.config.ts
+│   │   │   ├── index.scss
+│   │   │   └── index.tsx
+│   │   ├── teams/        # 队伍页面
+│   │   │   ├── index.config.ts
+│   │   │   ├── index.scss
+│   │   │   └── index.tsx
+│   │   ├── donate/       # 捐赠页面
+│   │   │   ├── index.config.ts
+│   │   │   ├── index.scss
+│   │   │   └── index.tsx
+│   │   └── profile/      # 个人页面
+│   │       ├── index.config.ts
+│   │       ├── index.scss
+│   │       └── index.tsx
+│   ├── store/            # 状态管理 (Jotai)
+│   │   └── atoms.ts
+│   ├── types/            # 类型定义
+│   │   └── index.ts      # 业务类型定义
+│   └── utils/            # 工具函数
+│       ├── constants.ts  # 常量定义
+│       └── formatters.ts # 格式化工具
+├── types/                 # 全局类型定义
 │   └── global.d.ts       # 全局类型
 ├── dist/                  # 构建输出目录
 ├── node_modules/          # 依赖包
@@ -479,6 +577,67 @@ function TodoApp() {
 - 使用 **Stylelint** 进行样式检查
 - 使用 **Prettier** 进行代码格式化
 - 使用 **Commitlint** 进行提交信息规范
+
+### 组件开发指南
+
+#### 创建新组件
+
+1. **在 `src/components/` 目录下创建组件文件**
+2. **导出组件到 `src/components/index.ts`**
+3. **使用 TypeScript 定义 props 类型**
+
+```tsx
+// src/components/MyComponent.tsx
+interface MyComponentProps {
+  title: string;
+  onAction?: () => void;
+}
+
+export const MyComponent = ({ title, onAction }: MyComponentProps) => {
+  return (
+    <View>
+      <Text>{title}</Text>
+      {onAction && <Button onClick={onAction}>操作</Button>}
+    </View>
+  );
+};
+```
+
+#### 创建自定义 Hook
+
+1. **在 `src/hooks/` 目录下创建 hook 文件**
+2. **导出 hook 到 `src/hooks/index.ts`**
+3. **使用 `use` 前缀命名**
+
+```tsx
+// src/hooks/useMyHook.ts
+export const useMyHook = () => {
+  const [state, setState] = useState(initialValue);
+
+  const action = () => {
+    // 业务逻辑
+  };
+
+  return { state, action };
+};
+```
+
+#### 类型定义
+
+1. **在 `src/types/index.ts` 中定义业务类型**
+2. **使用接口定义复杂对象**
+3. **使用联合类型定义枚举值**
+
+```tsx
+// src/types/index.ts
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+export type Status = 'pending' | 'loading' | 'success' | 'error';
+```
 
 ### Git 提交规范
 
