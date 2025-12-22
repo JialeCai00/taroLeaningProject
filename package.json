@@ -30,7 +30,13 @@
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
     "dev:harmony-hybrid": "npm run build:harmony-hybrid -- --watch",
-    "postinstall": "weapp-tw patch"
+    "postinstall": "weapp-tw patch",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "stylelint": "stylelint 'src/**/*.{css,scss,sass}'",
+    "stylelint:fix": "stylelint 'src/**/*.{css,scss,sass}' --fix",
+    "type-check": "tsc --noEmit",
+    "test": "echo \"No tests yet\" && exit 0"
   },
   "browserslist": [
     "defaults and fully supports es6-module",

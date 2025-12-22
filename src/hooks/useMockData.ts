@@ -1,7 +1,7 @@
 // src/hooks/useMockData.ts - 模拟数据 Hook
-import { useState, useEffect } from 'react';
-import type { Team, Donation, FundReport, Statistics, User } from '../types';
-import { TEAMS_LIST } from '../utils/constants';
+import { useState } from "react";
+import type { Team, Donation, FundReport, Statistics, User } from "../types";
+import { TEAMS_LIST } from "../utils/constants";
 
 export const useMockData = () => {
   const [statistics] = useState<Statistics>({
@@ -23,7 +23,7 @@ export const useMockData = () => {
       message: "你的每一步都在为他人点亮前行的灯塔。一起加油！",
       amount: 200,
       teamName: "爱心团队A",
-      date: "2024-12-15"
+      date: "2024-12-15",
     },
     {
       id: 2,
@@ -31,7 +31,7 @@ export const useMockData = () => {
       message: "Jiayou!",
       amount: 100,
       teamName: "希望小队",
-      date: "2024-12-14"
+      date: "2024-12-14",
     },
     {
       id: 3,
@@ -39,8 +39,8 @@ export const useMockData = () => {
       message: "加油",
       amount: 50,
       teamName: "阳光公益",
-      date: "2024-12-13"
-    }
+      date: "2024-12-13",
+    },
   ]);
 
   const [fundReports] = useState<FundReport[]>([
@@ -51,7 +51,7 @@ export const useMockData = () => {
       organizations: 68,
       projects: 83,
       beneficiaries: 76454,
-      regions: 19
+      regions: 19,
     },
     {
       year: 2023,
@@ -60,44 +60,44 @@ export const useMockData = () => {
       organizations: 62,
       projects: 75,
       beneficiaries: 68932,
-      regions: 17
-    }
+      regions: 17,
+    },
   ]);
 
   const [donationRecords] = useState<Donation[]>([
     {
       id: 1,
-      donorName: '张三',
+      donorName: "张三",
       amount: 200,
-      teamName: '爱心团队A',
-      date: '2024-12-15',
-      message: '希望孩子们都能健康成长！'
+      teamName: "爱心团队A",
+      date: "2024-12-15",
+      message: "希望孩子们都能健康成长！",
     },
     {
       id: 2,
-      donorName: '李四',
+      donorName: "李四",
       amount: 100,
-      teamName: '希望小队',
-      date: '2024-12-14',
-      message: '加油！为公益贡献一份力量'
+      teamName: "希望小队",
+      date: "2024-12-14",
+      message: "加油！为公益贡献一份力量",
     },
     {
       id: 3,
-      donorName: '王五',
+      donorName: "王五",
       amount: 500,
-      teamName: '阳光公益',
-      date: '2024-12-13',
-      message: '支持乡村教育，让更多孩子看到希望'
-    }
+      teamName: "阳光公益",
+      date: "2024-12-13",
+      message: "支持乡村教育，让更多孩子看到希望",
+    },
   ]);
 
   const [user] = useState<User>({
-    avatar: 'https://via.placeholder.com/100x100/FF6B6B/FFFFFF?text=用户',
-    name: '公益爱心人',
-    joinDate: '2024-01-15',
+    avatar: "https://via.placeholder.com/100x100/FF6B6B/FFFFFF?text=用户",
+    name: "公益爱心人",
+    joinDate: "2024-01-15",
     totalDonated: 1200,
     teamsSupported: 5,
-    donationCount: 8
+    donationCount: 8,
   });
 
   return {
@@ -107,6 +107,6 @@ export const useMockData = () => {
     fundReports,
     donationRecords,
     user,
-    teamsList: TEAMS_LIST
+    teamsList: TEAMS_LIST,
   };
 };

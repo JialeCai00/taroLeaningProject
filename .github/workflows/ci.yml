@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: 📦 检出代码
+        uses: actions/checkout@v4
+
+      - name: 🔧 设置 Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: 📥 安装依赖
+        run: |
+          npm install -g pnpm
+          pnpm install
+
+      - name: 🔍 代码检查 - ESLint
+        run: npx eslint . --ext .ts,.tsx,.js,.jsx --max-warnings 0
+        continue-on-error: false
+
+      - name: 🎨 样式检查 - Stylelint
+        run: npx stylelint "src/**/*.{css,scss,sass}" --max-warnings 0
+        continue-on-error: false
+
+      - name: 📝 TypeScript 类型检查
+        run: npx tsc --noEmit
+
+      - name: 🏗️ 构建微信小程序
+        run: pnpm run build:weapp
+        env:
+          NODE_ENV: production
+
+      - name: 📦 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: weapp-dist-${{ matrix.node-version }}
+          path: dist/
+          retention-days: 7
+
+      - name: 📊 构建产物大小报告
+        run: |
+          echo "## 📦 构建产物大小" >> $GITHUB_STEP_SUMMARY
+          du -sh dist/ >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 详细信息" >> $GITHUB_STEP_SUMMARY
+          du -h dist/* | sort -hr | head -n 20 >> $GITHUB_STEP_SUMMARY

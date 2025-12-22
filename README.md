@@ -81,31 +81,28 @@ Taro 是一个开放式跨端跨框架解决方案，支持使用 React/Vue/Nerv
 #### 使用 StatisticCard 组件
 
 ```tsx
-import { StatisticCard } from '../components';
+import { StatisticCard } from "../components";
 
 // 显示统计数据
-<StatisticCard
-  value={715}
-  label="参与队伍"
-/>
+<StatisticCard value={715} label="参与队伍" />;
 ```
 
 #### 使用 TeamCard 组件
 
 ```tsx
-import { TeamCard } from '../components';
+import { TeamCard } from "../components";
 
 <TeamCard
   team={teamData}
-  onViewDetail={() => console.log('查看详情')}
-  onDonate={() => console.log('我要捐款')}
-/>
+  onViewDetail={() => console.log("查看详情")}
+  onDonate={() => console.log("我要捐款")}
+/>;
 ```
 
 #### 使用自定义 Hook
 
 ```tsx
-import { useMockData, useTeams } from '../hooks';
+import { useMockData, useTeams } from "../hooks";
 
 function TeamsPage() {
   const { teams, filter, setFilter } = useTeams();
@@ -636,7 +633,7 @@ export interface User {
   email: string;
 }
 
-export type Status = 'pending' | 'loading' | 'success' | 'error';
+export type Status = "pending" | "loading" | "success" | "error";
 ```
 
 ### Git 提交规范
@@ -713,6 +710,11 @@ git commit -m "build: 更新依赖版本"
 - [ ] 实现错误边界和降级处理
 - [ ] 添加性能监控
 - [ ] 配置安全头和 CSP
+
+### Taro 公益小程序
+
+[![CI](https://github.com/your-username/taroProject/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/taroProject/actions/workflows/ci.yml)
+[![Deploy](https://github.com/your-username/taroProject/actions/workflows/deploy.yml/badge.svg)](https://github.com/your-username/taroProject/actions/workflows/deploy.yml)
 
 ## 🤝 贡献指南
 
