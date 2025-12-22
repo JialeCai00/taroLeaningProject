@@ -48,7 +48,7 @@ export default function Index() {
           <StatisticCard value={statistics.totalTeams} label="参与队伍" />
           <StatisticCard
             value={`¥${(statistics.totalRaised / 10000).toFixed(0)}万`}
-            label="筹款总额"
+            label="筹款总额66666666"
           />
           <StatisticCard value={statistics.totalDonations} label="捐赠人次" />
         </View>
